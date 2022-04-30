@@ -19,7 +19,7 @@ export class ProcessHttpRequest {
     this.errorMiddleware = errorMiddleware;
   }
 
-  public configure(): express.Express{
+  public configure(): express.Express {
     const app = express();
     this.bodyParserMiddleware.configure(app);
     this.configureRoutes(app);
@@ -27,7 +27,6 @@ export class ProcessHttpRequest {
 
     return app;
   }
-
 
   private configureRoutes(app: express.Express): void {
     RegisterRoutes(app);

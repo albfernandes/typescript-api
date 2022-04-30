@@ -7,7 +7,6 @@ import { IMiddleware } from "./middleware";
 
 @injectable()
 export class ErrorMiddleware implements IMiddleware {
-
   public configure(app: Express): void {
     app.use(
       (

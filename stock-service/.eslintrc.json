@@ -6,7 +6,6 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:sonarjs/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
     "plugin:import/errors",
@@ -16,7 +15,7 @@
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "/stock-service/tsconfig.json"
   },
   "settings": {
     "import/resolver": {
