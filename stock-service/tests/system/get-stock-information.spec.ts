@@ -33,7 +33,7 @@ describe("System", () => {
       expect(result.text).toEqual(expectedResult.body);
     });
 
-    it.only("Should return 200 with an array of stock informations on success", async () => {
+    it("Should return 200 with an array of stock informations on success", async () => {
       // given
       const app = container.get(ProcessHttpRequest).configure();
       const stockInformation = generateStockInformation({
