@@ -1,5 +1,5 @@
 {
-  "entryFile": "src/interface/api/api-handler.ts",
+  "entryFile": "index.ts",
   "noImplicitAdditionalProperties": "silently-remove-extras",
   "controllerPathGlobs": ["src/interface/api/controllers/*-controller.ts"],
   "spec": {
@@ -10,7 +10,7 @@
     "yaml": true
   },
   "routes": {
-    "basePath": "/()(people-importer/api)",
+    "basePath": "/()(stock-service/api)",
     "iocModule": "src/infrastructure/configurations/container",
     "routesDir": "src/interface/api",
     "routesFileName": "routes.ts"
