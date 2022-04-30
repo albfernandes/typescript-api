@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  application:
+    volumes:
+      - .:/application
+    ports:
+      - 3000:3000
+    build: .
+    command: sh -c "npm install && && npm run start:local"
+    working_dir: /application
+    environment:
+      AWS_ACCESS_KEY_ID: "dev"
+      AWS_REGION: "us-east-1"
+
