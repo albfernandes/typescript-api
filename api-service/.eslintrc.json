@@ -15,8 +15,7 @@
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module",
-    "project": "tsconfig.json",
-    "tsconfigRootDir": "api-service"
+    "project": "tsconfig.json"
   },
   "settings": {
     "import/resolver": {

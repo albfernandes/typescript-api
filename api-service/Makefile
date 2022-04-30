@@ -3,4 +3,4 @@ install:
 
 test:
 	docker-compose up -d
-	docker-compose exec -T application npm test
+	docker-compose exec -T api-service npm test

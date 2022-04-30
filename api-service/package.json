@@ -12,7 +12,7 @@
     "test:system:watch": "jest tests/system --watch --coverage=false",
     "test:unit": "jest tests/unit",
     "test:unit:watch": "jest tests/unit --watch --coverage=false",
-    "lint": "eslint . --ext ts",
+    "lint": "eslint . --ext ts --parser-options={tsconfigRootDir:null}",
     "test:integration": "jest tests/integration",
     "test:integration:watch": "jest tests/integration --watch --coverage=false",
     "pretest": "npm run build && npm run lint"
