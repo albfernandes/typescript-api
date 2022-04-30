@@ -15,7 +15,6 @@ decorate(injectable(), Controller);
 container.bind(Container).toConstantValue(container);
 container.bind(Types.Envs).toConstantValue(process.env);
 
-
 // infrastructure
 container.bind(Settings).toSelf();
 
@@ -24,9 +23,7 @@ container.bind(ProcessHttpRequest).toSelf();
 container.bind(BodyParserMiddleware).toSelf();
 container.bind(ErrorMiddleware).toSelf();
 
-
 // Controllers
 container.bind(GetStockController).toSelf();
-
 
 export { container, container as iocContainer };
