@@ -11,4 +11,5 @@ services:
     working_dir: /application
     environment:
       PORT: "3000"
+      STOCK_SERVICE_URL: "https://stooq.com"
 

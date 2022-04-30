@@ -5,6 +5,33 @@ components:
     requestBodies: {}
     responses: {}
     schemas:
+        Stock:
+            properties:
+                name:
+                    type: string
+                symbol:
+                    type: string
+                open:
+                    type: number
+                    format: double
+                high:
+                    type: number
+                    format: double
+                low:
+                    type: number
+                    format: double
+                close:
+                    type: number
+                    format: double
+            required:
+                - name
+                - symbol
+                - open
+                - high
+                - low
+                - close
+            type: object
+            additionalProperties: false
         ErrorResult:
             properties:
                 message:
@@ -20,7 +47,7 @@ info:
     contact: {}
 openapi: 3.0.0
 paths:
-    /v1/test:
+    /v1/stock:
         get:
             operationId: GetStock
             responses:
@@ -30,7 +57,7 @@ paths:
                         application/json:
                             schema:
                                 anyOf:
-                                    - {type: string}
+                                    - {items: {$ref: '#/components/schemas/Stock'}, type: array}
                                     - {$ref: '#/components/schemas/ErrorResult'}
                 '400':
                     description: ""
@@ -50,11 +77,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ErrorResult'
-            description: blablabla.
+            description: 'Retrivies an array of stock information.'
             tags:
-                - blabla
+                - Stocks
             security: []
-            parameters: []
+            parameters:
+                -
+                    in: query
+                    name: stockCode
+                    required: true
+                    schema:
+                        type: string
 servers:
     -
         url: 'https://localhost:3000/stock-service/api'

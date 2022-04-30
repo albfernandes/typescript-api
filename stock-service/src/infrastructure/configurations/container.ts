@@ -6,10 +6,15 @@ import { BodyParserMiddleware } from "../../interface/api/middlewares/body-parse
 import { ErrorMiddleware } from "../../interface/api/middlewares/error-middleware";
 import { Controller } from "tsoa";
 import { GetStockController } from "../../interface/api/controllers/get-stock-controller";
+import { StockService } from "../stock-service/stock-service";
+import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
 
 const container: Container = new Container();
 
 decorate(injectable(), Controller);
+
+// command handlers
+container.bind(GetStockCommandHandler).toSelf();
 
 // values
 container.bind(Container).toConstantValue(container);
@@ -17,6 +22,7 @@ container.bind(Types.Envs).toConstantValue(process.env);
 
 // infrastructure
 container.bind(Settings).toSelf();
+container.bind(StockService).toSelf();
 
 // Interface
 container.bind(ProcessHttpRequest).toSelf();

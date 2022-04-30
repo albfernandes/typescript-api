@@ -15,7 +15,7 @@
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module",
-    "project": "/stock-service/tsconfig.json"
+    "project": "stock-service/tsconfig.json"
   },
   "settings": {
     "import/resolver": {

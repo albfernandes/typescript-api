@@ -14,6 +14,10 @@ export class Settings {
     return Number(this.returnOrThrow("PORT"));
   }
 
+  public get stockServiceUrl(): string {
+    return this.returnOrThrow("STOCK_SERVICE_URL");
+  }
+
   private returnOrThrow(property: string): string {
     const value = this.envs[property];
     if (value === undefined) {

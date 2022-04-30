@@ -47,6 +47,7 @@
     "axios": "^0.21.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "csv-parse": "^5.0.4",
     "express": "^4.17.1",
     "inversify": "^5.0.5",
     "reflect-metadata": "^0.1.13",
