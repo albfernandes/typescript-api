@@ -1,4 +1,4 @@
-import { IsDefined, IsString } from "class-validator";
+import { IsDefined, IsNumber, IsString } from "class-validator";
 import { NonFunctionProperties } from "../../application/contracts/types";
 
 export class Stock {
@@ -11,19 +11,19 @@ export class Stock {
   public symbol!: string;
 
   @IsDefined()
-  @IsString()
+  @IsNumber()
   public open!: number;
 
   @IsDefined()
-  @IsString()
+  @IsNumber()
   public high!: number;
 
   @IsDefined()
-  @IsString()
+  @IsNumber()
   public low!: number;
 
   @IsDefined()
-  @IsString()
+  @IsNumber()
   public close!: number;
 
   public constructor(data: NonFunctionProperties<Stock>) {

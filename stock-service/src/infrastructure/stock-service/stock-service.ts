@@ -52,10 +52,10 @@ export class StockService {
       for await (const csvRow of parser) {
         const stock = new Stock({
           symbol: csvRow[StockResponseMapping.SYMBOL],
-          open: csvRow[StockResponseMapping.OPEN],
-          high: csvRow[StockResponseMapping.HIGH],
-          low: csvRow[StockResponseMapping.LOW],
-          close: csvRow[StockResponseMapping.CLOSE],
+          open: Number(csvRow[StockResponseMapping.OPEN]),
+          high: Number(csvRow[StockResponseMapping.HIGH]),
+          low: Number(csvRow[StockResponseMapping.LOW]),
+          close: Number(csvRow[StockResponseMapping.CLOSE]),
           name: csvRow[StockResponseMapping.NAME],
         });
 
