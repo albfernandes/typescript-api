@@ -1,5 +1,5 @@
 {
-  "entryFile": "src/interface/api/api-handler.ts",
+  "entryFile": "index.ts",
   "noImplicitAdditionalProperties": "silently-remove-extras",
   "controllerPathGlobs": ["src/interface/api/controllers/*-controller.ts"],
   "spec": {
