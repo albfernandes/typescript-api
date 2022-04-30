@@ -1,0 +1,18 @@
+{
+  "entryFile": "src/interface/api/api-handler.ts",
+  "noImplicitAdditionalProperties": "silently-remove-extras",
+  "controllerPathGlobs": ["src/interface/api/controllers/*-controller.ts"],
+  "spec": {
+    "basePath": "/api-service/api",
+    "host": "localhost:3001",
+    "outputDirectory": ".",
+    "specVersion": 3,
+    "yaml": true
+  },
+  "routes": {
+    "basePath": "/()(api-service/api)",
+    "iocModule": "src/infrastructure/configurations/container",
+    "routesDir": "src/interface/api",
+    "routesFileName": "routes.ts"
+  }
+}

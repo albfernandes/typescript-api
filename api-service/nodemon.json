@@ -1,0 +1,6 @@
+{
+  "exec": "node --inspect=0.0.0.0:9229 -r ts-node/register scripts/run:local.ts",
+  "ext": "ts",
+  "ignore": ["src/interface/api/routes.ts"],
+  "watch": ["src"]
+}
