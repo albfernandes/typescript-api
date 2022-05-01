@@ -1,12 +1,13 @@
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 import { Settings } from "../configurations/settings";
+import { UserEntity } from "./user/user-schema";
 
 const settings = new Settings(process.env);
 
 const databaseOptions: PostgresConnectionOptions = {
   database: settings.databaseName,
-  entities: [],
+  entities: [UserEntity],
   host: settings.databaseHost,
   logging: [],
   migrations: ["src/infrastructure/database/migrations/*.[j|t]s"],

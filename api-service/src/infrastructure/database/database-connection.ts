@@ -25,13 +25,10 @@ export class DatabaseConnection {
 
     try {
       if (this.connection?.isConnected === true) {
-        console.log("Exists connection", { connection: this.connection });
         return this.connection;
       }
 
       this.connection = await createConnection(this.databaseOptions);
-
-      console.log("Exists connection", { connection: this.connection });
 
       return this.connection;
     } catch (error) {

@@ -8,9 +8,6 @@ import { Parser } from "csv-parse";
 import { Stock } from "../../domain/entities/stock";
 import { validateSync } from "class-validator";
 import { StockResponseMapping } from "./enums/stock-response-mapping";
-// import { ResultNotFound } from "../../application/contracts/result/result/result-not-found";
-// import { plainToClass } from "class-transformer";
-// import { validateSync } from "class-validator";
 
 @injectable()
 export class StockService {

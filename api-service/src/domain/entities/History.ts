@@ -15,6 +15,10 @@ export class History {
 
   public date!: Date;
 
+  public userId!: string;
+
+  public id!: string;
+
   public constructor(data: NonFunctionProperties<History>) {
     this.name = data.name;
     this.symbol = data.symbol;
@@ -23,5 +27,7 @@ export class History {
     this.low = data.low;
     this.close = data.close;
     this.date = data.date;
+    this.userId = data.userId;
+    this.id = data.id;
   }
 }

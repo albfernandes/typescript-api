@@ -2,16 +2,18 @@ import { NonFunctionProperties } from "../../application/contracts/types";
 import { RoleEnum } from "../enums/Role";
 import { v4 as uuid } from "uuid";
 
-type CreateUserParams = Omit<NonFunctionProperties<User>, "createdAt" | "id">;
+type CreateUserParams = Omit<NonFunctionProperties<User>, "createdAt" | "id" | "password">;
 
 export class User {
-  public readonly name: String;
+  public readonly email: string;
+  public readonly password: string;
   public readonly role: RoleEnum;
   public readonly id: string;
   public readonly createdAt: Date;
 
   public constructor(data: NonFunctionProperties<User>) {
-    this.name = data.name;
+    this.email = data.email;
+    this.password = data.password;
     this.role = data.role;
     this.id = data.id;
     this.createdAt = data.createdAt;
@@ -19,7 +21,8 @@ export class User {
 
   public static create(data: CreateUserParams): User {
     return new User({
-      name: data.name,
+      email: data.email,
+      password: uuid(),
       role: data.role,
       createdAt: new Date(),
       id: uuid(),

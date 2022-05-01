@@ -18,6 +18,10 @@ export class Settings {
     return this.returnOrThrow("DATABASE_NAME");
   }
 
+  public get tokenSecret(): string {
+    return this.returnOrThrow("TOKEN_SECRET");
+  }
+
   public get databaseHost(): string {
     return this.returnOrThrow("DATABASE_HOST");
   }

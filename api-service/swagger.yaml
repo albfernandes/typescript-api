@@ -5,6 +5,17 @@ components:
     requestBodies: {}
     responses: {}
     schemas:
+        RegisterUserResponse:
+            properties:
+                token:
+                    type: string
+                email:
+                    type: string
+            required:
+                - token
+                - email
+            type: object
+            additionalProperties: false
         ErrorResult:
             properties:
                 message:
@@ -13,6 +24,11 @@ components:
                 - message
             type: object
             additionalProperties: false
+        RoleEnum:
+            enum:
+                - user
+                - admin
+            type: string
     securitySchemes: {}
 info:
     title: api-service
@@ -20,7 +36,7 @@ info:
     contact: {}
 openapi: 3.0.0
 paths:
-    /v1/test:
+    /v1/register:
         post:
             operationId: Register
             responses:
@@ -30,7 +46,7 @@ paths:
                         application/json:
                             schema:
                                 anyOf:
-                                    - {type: string}
+                                    - {$ref: '#/components/schemas/RegisterUserResponse'}
                                     - {$ref: '#/components/schemas/ErrorResult'}
                 '400':
                     description: ""
@@ -50,11 +66,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ErrorResult'
-            description: blablabla.
+            description: 'Register an user.'
             tags:
-                - blabla
+                - Register
             security: []
             parameters: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            properties:
+                                role:
+                                    $ref: '#/components/schemas/RoleEnum'
+                                email:
+                                    type: string
+                            required:
+                                - role
+                                - email
+                            type: object
 servers:
     -
         url: 'https://localhost:3001/api-service/api'

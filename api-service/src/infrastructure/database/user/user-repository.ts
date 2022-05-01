@@ -1,6 +1,7 @@
 import { injectable, inject } from "inversify";
 import { Result } from "../../../application/contracts/result/result/result";
 import { ResultError } from "../../../application/contracts/result/result/result-error";
+import { ResultNotFound } from "../../../application/contracts/result/result/result-not-found";
 import { ResultSuccess } from "../../../application/contracts/result/result/result-success";
 import { NonFunctionProperties } from "../../../application/contracts/types";
 import { User } from "../../../domain/entities/User";
@@ -29,6 +30,32 @@ export class UserRepository {
       console.error("Failed to save user", { error });
 
       return new ResultError("Failed to save user");
+    }
+  }
+
+  public async findByEmail(email: string): Promise<Result> {
+    console.log("Finding user by email", { email });
+
+    try {
+      const connection = await this.databaseConnection.getConnection();
+
+      const queryBuilder = connection.manager.createQueryBuilder(UserEntity, "user").where("user.email = :email", {
+        email,
+      });
+
+      const foundRawUser = await queryBuilder.getOne();
+
+      if (foundRawUser === undefined) {
+        console.log("user not found by email", { email });
+
+        return new ResultNotFound("user not found by email");
+      }
+
+      return new ResultSuccess(undefined);
+    } catch (error) {
+      console.error("Failed to find user by email", { error });
+
+      return new ResultError("Failed to find user by email");
     }
   }
 }

@@ -18,6 +18,7 @@ services:
       DATABASE_NAME: api_service
       DATABASE_HOST: "db"
       DATABASE_PORT: 5432
+      TOKEN_SECRET: anysecret
 
   db:
     image: postgres:11-alpine
