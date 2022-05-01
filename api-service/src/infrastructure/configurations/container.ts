@@ -11,6 +11,9 @@ import { UserRepository } from "../database/user/user-repository";
 import { CryptographyService } from "../cryptography/cryptography-service";
 import { DatabaseConnection } from "../database/database-connection";
 import databaseOptions from "../database/database-options";
+import { GetStockController } from "../../interface/api/controllers/get-stock-controller";
+import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
+import { StockService } from "../stock-service/stock-service";
 
 const container: Container = new Container();
 
@@ -23,12 +26,14 @@ container.bind(Types.DatabaseOptions).toConstantValue(databaseOptions);
 
 // command handlers
 container.bind(RegisterUserCommandHandler).toSelf();
+container.bind(GetStockCommandHandler).toSelf();
 
 // infrastructure
 container.bind(Settings).toSelf();
 container.bind(UserRepository).toSelf();
 container.bind(CryptographyService).toSelf();
 container.bind(DatabaseConnection).toSelf().inSingletonScope();
+container.bind(StockService).toSelf();
 
 // Interface
 container.bind(ProcessHttpRequest).toSelf();
@@ -37,5 +42,6 @@ container.bind(ErrorMiddleware).toSelf();
 
 // Controllers
 container.bind(RegisterController).toSelf();
+container.bind(GetStockController).toSelf();
 
 export { container, container as iocContainer };

@@ -2,6 +2,9 @@ version: "3.8"
 
 services:
   api-service:
+    container_name: apiservice
+    networks:
+      - mynetwork
     volumes:
       - .:/application
     ports:
@@ -19,9 +22,12 @@ services:
       DATABASE_HOST: "db"
       DATABASE_PORT: 5432
       TOKEN_SECRET: anysecret
+      STOCK_SERVICE_URL: "http://stock-service:3000"
 
   db:
     image: postgres:11-alpine
+    networks:
+      - mynetwork
     environment:
       POSTGRES_DB: api_service
       POSTGRES_PASSWORD: postgres
@@ -38,3 +44,7 @@ services:
 
 volumes:
   postgres:
+
+networks:
+  mynetwork:
+    name: mynetwork

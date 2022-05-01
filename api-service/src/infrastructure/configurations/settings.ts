@@ -18,6 +18,10 @@ export class Settings {
     return this.returnOrThrow("DATABASE_NAME");
   }
 
+  public get stockServiceUrl(): string {
+    return this.returnOrThrow("STOCK_SERVICE_URL");
+  }
+
   public get tokenSecret(): string {
     return this.returnOrThrow("TOKEN_SECRET");
   }

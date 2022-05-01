@@ -2,6 +2,9 @@ version: "3.8"
 
 services:
   stock-service:
+    container_name: stockservice
+    networks:
+      - mynetwork
     volumes:
       - .:/application
     ports:
@@ -12,4 +15,6 @@ services:
     environment:
       PORT: "3000"
       STOCK_SERVICE_URL: "https://stooq.com"
-
+networks:
+  mynetwork:
+    name: mynetwork
