@@ -1,0 +1,34 @@
+import { injectable, inject } from "inversify";
+import { Result } from "../../../application/contracts/result/result/result";
+import { ResultError } from "../../../application/contracts/result/result/result-error";
+import { ResultSuccess } from "../../../application/contracts/result/result/result-success";
+import { NonFunctionProperties } from "../../../application/contracts/types";
+import { User } from "../../../domain/entities/User";
+import { DatabaseConnection } from "../database-connection";
+import { UserEntity } from "./user-schema";
+
+@injectable()
+export class UserRepository {
+  private readonly databaseConnection: DatabaseConnection;
+
+  public constructor(@inject(DatabaseConnection) databaseConnection: DatabaseConnection) {
+    this.databaseConnection = databaseConnection;
+  }
+
+  public async save(user: User): Promise<Result> {
+    console.log("Saving user", { data: user });
+
+    try {
+      const connection = await this.databaseConnection.getConnection();
+      const result = await connection.getRepository<NonFunctionProperties<User>>(UserEntity).save(user);
+
+      console.log("Saved user", { result });
+
+      return new ResultSuccess(undefined);
+    } catch (error) {
+      console.error("Failed to save user", { error });
+
+      return new ResultError("Failed to save user");
+    }
+  }
+}

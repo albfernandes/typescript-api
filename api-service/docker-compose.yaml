@@ -7,8 +7,33 @@ services:
     ports:
       - 3001:3001
     build: .
-    command: sh -c "npm install && npm run start:local"
+    command: sh -c "npm install && npm run db:migrate && npm run start:local"
     working_dir: /application
+    depends_on:
+      - db
     environment:
       PORT: "3001"
+      DATABASE_PASSWORD: postgres
+      DATABASE_USERNAME: postgres
+      DATABASE_NAME: api_service
+      DATABASE_HOST: "db"
+      DATABASE_PORT: 5432
 
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: api_service
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+
+
+    ports:
+      - 5432:5432
+
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    command: postgres -c 'shared_buffers=256MB' -c 'max_connections=2000'
+  
+
+volumes:
+  postgres:

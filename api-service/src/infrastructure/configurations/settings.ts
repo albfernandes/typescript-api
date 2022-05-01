@@ -14,6 +14,26 @@ export class Settings {
     return Number(this.returnOrThrow("PORT"));
   }
 
+  public get databaseName(): string {
+    return this.returnOrThrow("DATABASE_NAME");
+  }
+
+  public get databaseHost(): string {
+    return this.returnOrThrow("DATABASE_HOST");
+  }
+
+  public get databasePort(): number {
+    return Number(this.returnOrThrow("DATABASE_PORT"));
+  }
+
+  public get databaseUsername(): string {
+    return this.returnOrThrow("DATABASE_USERNAME");
+  }
+
+  public get databasePassword(): string {
+    return this.returnOrThrow("DATABASE_PASSWORD");
+  }
+
   private returnOrThrow(property: string): string {
     const value = this.envs[property];
     if (value === undefined) {

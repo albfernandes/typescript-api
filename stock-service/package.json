@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prepare": "cd .. && husky install .husky",
     "build": "tsc -p .",
     "test": "jest tests",
     "test:system": "jest tests/system",
