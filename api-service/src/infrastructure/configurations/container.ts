@@ -17,6 +17,8 @@ import { StockService } from "../stock-service/stock-service";
 import { AuthenticateUserCommandHandler } from "../../application/authenticate-user/authenticate-user-command-handler";
 import { HistoryRepository } from "../database/history/history-repository";
 import { GetHistoryController } from "../../interface/api/controllers/get-history-controller";
+import { StatsRepository } from "../database/stats/stats-repository";
+import { GetStatsController } from "../../interface/api/controllers/get-stats-controller";
 
 const container: Container = new Container();
 
@@ -36,6 +38,7 @@ container.bind(AuthenticateUserCommandHandler).toSelf();
 container.bind(Settings).toSelf();
 container.bind(UserRepository).toSelf();
 container.bind(HistoryRepository).toSelf();
+container.bind(StatsRepository).toSelf();
 container.bind(CryptographyService).toSelf();
 container.bind(DatabaseConnection).toSelf().inSingletonScope();
 container.bind(StockService).toSelf();
@@ -49,5 +52,6 @@ container.bind(ErrorMiddleware).toSelf();
 container.bind(RegisterController).toSelf();
 container.bind(GetStockController).toSelf();
 container.bind(GetHistoryController).toSelf();
+container.bind(GetStatsController).toSelf();
 
 export { container, container as iocContainer };

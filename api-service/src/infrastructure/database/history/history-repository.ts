@@ -42,7 +42,8 @@ export class HistoryRepository {
         .createQueryBuilder(HistoryEntity, "history")
         .where("history.user_id = :userId", {
           userId,
-        });
+        })
+        .orderBy("history.date", "ASC");
 
       const foundRawHistorical = await queryBuilder.getMany();
 
