@@ -20,7 +20,7 @@ export const HistoryEntity = new EntitySchema<History>({
       type: "one-to-one",
       target: "user",
       joinColumn: {
-        name: "userId",
+        name: "user_id",
         referencedColumnName: "id",
       },
     },

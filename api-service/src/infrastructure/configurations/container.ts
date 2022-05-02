@@ -15,6 +15,7 @@ import { GetStockController } from "../../interface/api/controllers/get-stock-co
 import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
 import { StockService } from "../stock-service/stock-service";
 import { AuthenticateUserCommandHandler } from "../../application/authenticate-user/authenticate-user-command-handler";
+import { HistoryRepository } from "../database/history/history-repository";
 
 const container: Container = new Container();
 
@@ -33,6 +34,7 @@ container.bind(AuthenticateUserCommandHandler).toSelf();
 // infrastructure
 container.bind(Settings).toSelf();
 container.bind(UserRepository).toSelf();
+container.bind(HistoryRepository).toSelf();
 container.bind(CryptographyService).toSelf();
 container.bind(DatabaseConnection).toSelf().inSingletonScope();
 container.bind(StockService).toSelf();

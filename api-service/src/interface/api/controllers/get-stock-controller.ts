@@ -51,7 +51,7 @@ export class GetStockController extends Controller {
       };
     }
 
-    const getStockCommand = new GetStockCommand({ stockCode });
+    const getStockCommand = new GetStockCommand({ stockCode, userId: authenticationResult.data.id });
 
     const result = await this.getStockCommandHandler.handle(getStockCommand);
 
