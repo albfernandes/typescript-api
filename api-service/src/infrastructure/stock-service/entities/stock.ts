@@ -1,5 +1,5 @@
 import { IsDefined, IsNumber, IsString } from "class-validator";
-import { NonFunctionProperties } from "../../application/contracts/types";
+import { NonFunctionProperties } from "../../../application/contracts/types";
 
 export class Stock {
   @IsDefined()
