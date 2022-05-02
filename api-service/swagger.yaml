@@ -63,6 +63,47 @@ info:
     contact: {}
 openapi: 3.0.0
 paths:
+    /v1/history:
+        get:
+            operationId: GetHistorical
+            responses:
+                '200':
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                anyOf:
+                                    - {items: {$ref: '#/components/schemas/Stock'}, type: array}
+                                    - {$ref: '#/components/schemas/ErrorResult'}
+                '400':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResult'
+                '404':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResult'
+                '500':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResult'
+            description: 'Retrivies an array of queries history.'
+            tags:
+                - History
+            security: []
+            parameters:
+                -
+                    in: header
+                    name: authorization
+                    required: true
+                    schema:
+                        type: string
     /v1/stock:
         get:
             operationId: GetStock

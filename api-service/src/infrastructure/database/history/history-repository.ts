@@ -31,4 +31,26 @@ export class HistoryRepository {
       return new ResultError("Failed to save history");
     }
   }
+
+  public async getByUserId(userId: string): Promise<Result<History[]>> {
+    console.log("Finding historical by user id", { userId });
+
+    try {
+      const connection = await this.databaseConnection.getConnection();
+
+      const queryBuilder = connection.manager
+        .createQueryBuilder(HistoryEntity, "history")
+        .where("history.user_id = :userId", {
+          userId,
+        });
+
+      const foundRawHistorical = await queryBuilder.getMany();
+
+      return new ResultSuccess(foundRawHistorical);
+    } catch (error) {
+      console.error("Failed to find Historical by user id", { error });
+
+      return new ResultError("Failed to find Historical by user id");
+    }
+  }
 }

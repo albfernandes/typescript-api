@@ -16,6 +16,7 @@ import { GetStockCommandHandler } from "../../application/get-stock/get-stock-co
 import { StockService } from "../stock-service/stock-service";
 import { AuthenticateUserCommandHandler } from "../../application/authenticate-user/authenticate-user-command-handler";
 import { HistoryRepository } from "../database/history/history-repository";
+import { GetHistoryController } from "../../interface/api/controllers/get-history-controller";
 
 const container: Container = new Container();
 
@@ -47,5 +48,6 @@ container.bind(ErrorMiddleware).toSelf();
 // Controllers
 container.bind(RegisterController).toSelf();
 container.bind(GetStockController).toSelf();
+container.bind(GetHistoryController).toSelf();
 
 export { container, container as iocContainer };
