@@ -63,6 +63,7 @@ export function RegisterRoutes(app: express.Router) {
             async function GetStockController_getStock(request: any, response: any, next: any) {
             const args = {
                     stockCode: {"in":"query","name":"stockCode","required":true,"dataType":"string"},
+                    authorization: {"in":"header","name":"authorization","required":true,"dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

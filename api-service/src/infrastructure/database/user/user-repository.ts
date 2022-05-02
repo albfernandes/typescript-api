@@ -58,4 +58,30 @@ export class UserRepository {
       return new ResultError("Failed to find user by email");
     }
   }
+
+  public async findById(id: string): Promise<Result<User>> {
+    console.log("Finding user by id", { id });
+
+    try {
+      const connection = await this.databaseConnection.getConnection();
+
+      const queryBuilder = connection.manager.createQueryBuilder(UserEntity, "user").where("user.id = :id", {
+        id,
+      });
+
+      const foundRawUser = await queryBuilder.getOne();
+
+      if (foundRawUser === undefined) {
+        console.log("user not found by id", { id });
+
+        return new ResultNotFound("user not found by id");
+      }
+
+      return new ResultSuccess(foundRawUser);
+    } catch (error) {
+      console.error("Failed to find user by id", { error });
+
+      return new ResultError("Failed to find user by id");
+    }
+  }
 }

@@ -14,6 +14,7 @@ import databaseOptions from "../database/database-options";
 import { GetStockController } from "../../interface/api/controllers/get-stock-controller";
 import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
 import { StockService } from "../stock-service/stock-service";
+import { AuthenticateUserCommandHandler } from "../../application/authenticate-user/authenticate-user-command-handler";
 
 const container: Container = new Container();
 
@@ -27,6 +28,7 @@ container.bind(Types.DatabaseOptions).toConstantValue(databaseOptions);
 // command handlers
 container.bind(RegisterUserCommandHandler).toSelf();
 container.bind(GetStockCommandHandler).toSelf();
+container.bind(AuthenticateUserCommandHandler).toSelf();
 
 // infrastructure
 container.bind(Settings).toSelf();

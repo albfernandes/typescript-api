@@ -104,6 +104,12 @@ paths:
                     required: true
                     schema:
                         type: string
+                -
+                    in: header
+                    name: authorization
+                    required: true
+                    schema:
+                        type: string
     /v1/register:
         post:
             operationId: Register
