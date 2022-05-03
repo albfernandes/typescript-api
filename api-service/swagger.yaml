@@ -118,7 +118,7 @@ paths:
                         type: string
     /v1/stats:
         get:
-            operationId: GetHistorical
+            operationId: GetStats
             responses:
                 '200':
                     description: Ok

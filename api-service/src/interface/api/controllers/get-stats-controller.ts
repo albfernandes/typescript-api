@@ -31,7 +31,7 @@ export class GetStatsController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.BAD_REQUEST)
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
-  public async getHistorical(@Header() authorization: string): Promise<Stats[] | ErrorResult> {
+  public async getStats(@Header() authorization: string): Promise<Stats[] | ErrorResult> {
     console.log("Starting list stats route");
 
     const validRolesToThisUseCase = [RoleEnum.ADMIN];
