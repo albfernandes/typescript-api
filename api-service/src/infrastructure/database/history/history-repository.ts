@@ -43,7 +43,7 @@ export class HistoryRepository {
         .where("history.user_id = :userId", {
           userId,
         })
-        .orderBy("history.date", "ASC");
+        .orderBy("history.date", "DESC");
 
       const foundRawHistorical = await queryBuilder.getMany();
 

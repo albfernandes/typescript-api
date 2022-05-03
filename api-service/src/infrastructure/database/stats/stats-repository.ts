@@ -34,7 +34,7 @@ export class StatsRepository {
   }
 
   public async findByStock(stock: string): Promise<Result<Stats>> {
-    console.log("Finding user by stock", { stock });
+    console.log("Finding stats by stock", { stock });
 
     try {
       const connection = await this.databaseConnection.getConnection();
@@ -46,37 +46,37 @@ export class StatsRepository {
       const foundRawStats = await queryBuilder.getOne();
 
       if (foundRawStats === undefined) {
-        console.log("user not found by stock", { stock });
+        console.log("stats not found by stock", { stock });
 
-        return new ResultNotFound("user not found by stock");
+        return new ResultNotFound("stats not found by stock");
       }
 
       return new ResultSuccess(new Stats({ ...foundRawStats }));
     } catch (error) {
-      console.error("Failed to find user by stock", { error });
+      console.error("Failed to find stats by stock", { error });
 
-      return new ResultError("Failed to find user by stock");
+      return new ResultError("Failed to find stats by stock");
     }
   }
 
   public async list(limit = 5): Promise<Result<Stats[]>> {
-    console.log("Listing historical", { limit });
+    console.log("Listing stats", { limit });
 
     try {
       const connection = await this.databaseConnection.getConnection();
 
       const queryBuilder = connection.manager
         .createQueryBuilder(StatsEntity, "stats")
-        .orderBy("stats.times_requested", "ASC")
+        .orderBy("stats.times_requested", "DESC")
         .limit(limit);
 
       const rawHistorical = await queryBuilder.getMany();
 
       return new ResultSuccess(rawHistorical);
     } catch (error) {
-      console.error("Failed to list historical", { error });
+      console.error("Failed to list stats", { error });
 
-      return new ResultError("Failed to list historical");
+      return new ResultError("Failed to list stats");
     }
   }
 }
