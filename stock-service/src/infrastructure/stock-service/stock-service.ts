@@ -8,7 +8,6 @@ import { StockResponseMapping } from "./enums/stock-response-mapping";
 import { Result } from "../../application/contracts/result/result";
 import { ResultError } from "../../application/contracts/result/result-error";
 import { ResultSuccess } from "../../application/contracts/result/result-success";
-import { ResultNotFound } from "../../application/contracts/result/result-not-found";
 
 @injectable()
 export class StockService {
@@ -65,7 +64,7 @@ export class StockService {
             validationErrors: errors,
           });
 
-          return new ResultNotFound("Received an invalid stock");
+          return new ResultError("Received an invalid stock");
         }
 
         stocks.push(stock);
