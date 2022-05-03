@@ -3,10 +3,10 @@ import { User } from "../../domain/entities/User";
 import { CryptographyService } from "../../infrastructure/cryptography/cryptography-service";
 import { UserRepository } from "../../infrastructure/database/user/user-repository";
 import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result/result";
-import { ResultError } from "../contracts/result/result/result-error";
-import { ResultStatusEnum } from "../contracts/result/result/result-status-enum";
-import { ResultSuccess } from "../contracts/result/result/result-success";
+import { Result } from "../contracts/result/result";
+import { ResultError } from "../contracts/result/result-error";
+import { ResultStatusEnum } from "../contracts/result/result-status-enum";
+import { ResultSuccess } from "../contracts/result/result-success";
 import { RegisterUserCommand } from "./register-user-command";
 
 export interface RegisterUserResponse {

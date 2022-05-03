@@ -4,8 +4,8 @@ import faker from "faker";
 import { HttpStatusCode } from "../../../../src/infrastructure/http/http-status-code";
 import { StockService } from "../../../../src/infrastructure/stock-service/stock-service";
 import { Stock } from "../../../../src/domain/entities/stock";
-import { ResultSuccess } from "../../../../src/application/contracts/result/result/result-success";
-import { ResultError } from "../../../../src/application/contracts/result/result/result-error";
+import { ResultError } from "../../../../src/application/contracts/result/result-error";
+import { ResultSuccess } from "../../../../src/application/contracts/result/result-success";
 
 const generateServiceDependencies = () => {
   const settings = {

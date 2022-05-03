@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { Stock } from "../../domain/entities/stock";
 import { StockService } from "../../infrastructure/stock-service/stock-service";
 import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result/result";
+import { Result } from "../contracts/result/result";
 import { GetStockCommand } from "./get-stock-command";
 
 @injectable()

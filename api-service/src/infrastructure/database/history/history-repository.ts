@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
-import { Result } from "../../../application/contracts/result/result/result";
-import { ResultError } from "../../../application/contracts/result/result/result-error";
-import { ResultSuccess } from "../../../application/contracts/result/result/result-success";
+import { Result } from "../../../application/contracts/result/result";
+import { ResultError } from "../../../application/contracts/result/result-error";
+import { ResultSuccess } from "../../../application/contracts/result/result-success";
 import { NonFunctionProperties } from "../../../application/contracts/types";
 import { History } from "../../../domain/entities/History";
 import { DatabaseConnection } from "../database-connection";

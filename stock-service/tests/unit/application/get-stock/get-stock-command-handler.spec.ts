@@ -1,10 +1,10 @@
-import { ResultError } from "../../../../src/application/contracts/result/result/result-error";
 import faker from "faker";
+import { ResultError } from "../../../../src/application/contracts/result/result-error";
+import { ResultSuccess } from "../../../../src/application/contracts/result/result-success";
 import { GetStockCommand } from "../../../../src/application/get-stock/get-stock-command";
 import { GetStockCommandHandler } from "../../../../src/application/get-stock/get-stock-command-handler";
 import { StockService } from "../../../../src/infrastructure/stock-service/stock-service";
 import { generateStockInformation } from "../../../integration/fixtures/stock-fixture";
-import { ResultSuccess } from "../../../../src/application/contracts/result/result/result-success";
 
 interface MockDependencies {
   getStock?: Function;

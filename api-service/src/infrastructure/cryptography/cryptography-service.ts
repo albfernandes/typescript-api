@@ -1,9 +1,9 @@
 import { inject, injectable } from "inversify";
 import { Settings } from "../configurations/settings";
-import { ResultSuccess } from "../../application/contracts/result/result/result-success";
-import { ResultError } from "../../application/contracts/result/result/result-error";
-import { Result } from "../../application/contracts/result/result/result";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
+import { Result } from "../../application/contracts/result/result";
+import { ResultError } from "../../application/contracts/result/result-error";
+import { ResultSuccess } from "../../application/contracts/result/result-success";
 
 @injectable()
 export class CryptographyService {

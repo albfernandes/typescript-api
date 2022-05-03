@@ -3,8 +3,8 @@ import { User } from "../../domain/entities/User";
 import { CryptographyService } from "../../infrastructure/cryptography/cryptography-service";
 import { UserRepository } from "../../infrastructure/database/user/user-repository";
 import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result/result";
-import { ResultError } from "../contracts/result/result/result-error";
+import { Result } from "../contracts/result/result";
+import { ResultError } from "../contracts/result/result-error";
 import { AuthenticateUserCommand } from "./authenticate-user-command";
 
 @injectable()

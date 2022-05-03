@@ -1,4 +1,4 @@
-import { Result } from "./result/result/result";
+import { Result } from "./result/result";
 
 export interface CommandHandler<C, R = undefined> {
   handle(request: C): Promise<Result<R>>;

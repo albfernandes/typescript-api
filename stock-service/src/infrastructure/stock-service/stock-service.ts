@@ -1,13 +1,13 @@
 import { inject, injectable } from "inversify";
 import axios, { AxiosInstance } from "axios";
 import { Settings } from "../configurations/settings";
-import { ResultSuccess } from "../../application/contracts/result/result/result-success";
-import { ResultError } from "../../application/contracts/result/result/result-error";
-import { Result } from "../../application/contracts/result/result/result";
 import { Parser } from "csv-parse";
 import { Stock } from "../../domain/entities/stock";
 import { validateSync } from "class-validator";
 import { StockResponseMapping } from "./enums/stock-response-mapping";
+import { Result } from "../../application/contracts/result/result";
+import { ResultError } from "../../application/contracts/result/result-error";
+import { ResultSuccess } from "../../application/contracts/result/result-success";
 
 @injectable()
 export class StockService {

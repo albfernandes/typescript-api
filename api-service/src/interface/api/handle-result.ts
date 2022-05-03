@@ -1,5 +1,5 @@
-import { Result } from "../../application/contracts/result/result/result";
-import { ResultStatusEnum } from "../../application/contracts/result/result/result-status-enum";
+import { Result } from "../../application/contracts/result/result";
+import { ResultStatusEnum } from "../../application/contracts/result/result-status-enum";
 import { HttpStatusCode } from "../../infrastructure/http/http-status-code";
 import { ErrorResult } from "./types";
 

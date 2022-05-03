@@ -1,10 +1,10 @@
 import { inject, injectable } from "inversify";
 import axios, { AxiosInstance } from "axios";
 import { Settings } from "../configurations/settings";
-import { ResultSuccess } from "../../application/contracts/result/result/result-success";
-import { ResultError } from "../../application/contracts/result/result/result-error";
-import { Result } from "../../application/contracts/result/result/result";
 import { Stock } from "./entities/stock";
+import { Result } from "../../application/contracts/result/result";
+import { ResultError } from "../../application/contracts/result/result-error";
+import { ResultSuccess } from "../../application/contracts/result/result-success";
 
 @injectable()
 export class StockService {
