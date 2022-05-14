@@ -11,14 +11,14 @@ import { UserRepository } from "../database/user/user-repository";
 import { CryptographyService } from "../cryptography/cryptography-service";
 import { DatabaseConnection } from "../database/database-connection";
 import databaseOptions from "../database/database-options";
-import { GetStockController } from "../../interface/api/controllers/get-stock-controller";
+import { StockController } from "../../interface/api/controllers/stock-controller";
 import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
 import { StockService } from "../stock-service/stock-service";
 import { AuthenticateUserCommandHandler } from "../../application/authenticate-user/authenticate-user-command-handler";
 import { HistoryRepository } from "../database/history/history-repository";
-import { GetHistoryController } from "../../interface/api/controllers/get-history-controller";
+import { HistoryController } from "../../interface/api/controllers/history-controller";
 import { StatsRepository } from "../database/stats/stats-repository";
-import { GetStatsController } from "../../interface/api/controllers/get-stats-controller";
+import { StatsController } from "../../interface/api/controllers/stats-controller";
 
 const container: Container = new Container();
 
@@ -50,8 +50,8 @@ container.bind(ErrorMiddleware).toSelf();
 
 // Controllers
 container.bind(RegisterController).toSelf();
-container.bind(GetStockController).toSelf();
-container.bind(GetHistoryController).toSelf();
-container.bind(GetStatsController).toSelf();
+container.bind(StockController).toSelf();
+container.bind(HistoryController).toSelf();
+container.bind(StatsController).toSelf();
 
 export { container, container as iocContainer };

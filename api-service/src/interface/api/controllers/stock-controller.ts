@@ -11,7 +11,7 @@ import { ErrorResult } from "../types";
 
 @injectable()
 @Route()
-export class GetStockController extends Controller {
+export class StockController extends Controller {
   private getStockCommandHandler: GetStockCommandHandler;
 
   private authenticateUserCommandHandler: AuthenticateUserCommandHandler;

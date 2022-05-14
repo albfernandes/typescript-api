@@ -10,7 +10,7 @@ import { ErrorResult } from "../types";
 
 @injectable()
 @Route()
-export class GetHistoryController extends Controller {
+export class HistoryController extends Controller {
   private historyRepository: HistoryRepository;
   private authenticateUserCommandHandler: AuthenticateUserCommandHandler;
 
