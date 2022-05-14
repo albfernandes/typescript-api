@@ -15,26 +15,20 @@ export class CryptographyService {
 
   public async encrypt(payload: string | Object | Buffer): Promise<Result<string>> {
     try {
-      console.log("Starting encrypt");
-
       const token = await sign(payload, this.settings.tokenSecret);
 
       return new ResultSuccess(token);
     } catch (error) {
-      console.error("Failed to encrypt", { error });
       return new ResultError("Failed to encrypt");
     }
   }
 
   public async decrypt(encodedToken: string): Promise<Result<string | JwtPayload>> {
     try {
-      console.log("Starting decrypt");
-
       const decodedToken = await verify(encodedToken, this.settings.tokenSecret);
 
       return new ResultSuccess(decodedToken);
     } catch (error) {
-      console.error("Failed to decrypt", { error });
       return new ResultError("Failed to decrypt");
     }
   }

@@ -16,13 +16,9 @@ export class HistoryRepository {
   }
 
   public async save(history: History): Promise<Result> {
-    console.log("Saving history", { history });
-
     try {
       const connection = await this.databaseConnection.getConnection();
-      const result = await connection.getRepository<NonFunctionProperties<History>>(HistoryEntity).save(history);
-
-      console.log("Saved history", { result });
+      await connection.getRepository<NonFunctionProperties<History>>(HistoryEntity).save(history);
 
       return new ResultSuccess(undefined);
     } catch (error) {
@@ -33,8 +29,6 @@ export class HistoryRepository {
   }
 
   public async getByUserId(userId: string): Promise<Result<History[]>> {
-    console.log("Finding historical by user id", { userId });
-
     try {
       const connection = await this.databaseConnection.getConnection();
 

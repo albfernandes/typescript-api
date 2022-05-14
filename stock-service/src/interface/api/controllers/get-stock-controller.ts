@@ -26,8 +26,6 @@ export class GetStockController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
   public async getStock(@Query() stockCode: string): Promise<Stock[] | ErrorResult> {
-    console.log("Starting get stock route", { stockCode });
-
     const getStockCommand = new GetStockCommand({ stockCode });
 
     const result = await this.getStockCommandHandler.handle(getStockCommand);

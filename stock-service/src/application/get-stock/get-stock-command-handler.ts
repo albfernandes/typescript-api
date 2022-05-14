@@ -14,15 +14,11 @@ export class GetStockCommandHandler implements CommandHandler<GetStockCommand, S
   }
 
   public async handle(command: GetStockCommand): Promise<Result<Stock[]>> {
-    console.log("Getting stock information", { command });
-
     const foundStockInformation = await this.stockService.getStock(command.stockCode);
 
     if (foundStockInformation.isError) {
       return foundStockInformation;
     }
-
-    console.log("Got stock information with success", { command, foundStockInformation });
 
     return foundStockInformation;
   }

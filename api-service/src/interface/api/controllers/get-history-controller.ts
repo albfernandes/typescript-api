@@ -32,8 +32,6 @@ export class GetHistoryController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
   public async getHistorical(@Header() authorization: string): Promise<Stock[] | ErrorResult> {
-    console.log("Starting get queries history route");
-
     const validRolesToThisUseCase = [RoleEnum.USER];
 
     const authenticationResult = await this.authenticateUserCommandHandler.handle({

@@ -13,16 +13,12 @@ export class DatabaseConnection {
   }
 
   public async closeConnection(): Promise<void> {
-    console.log("closeConnection");
-
     if (this.connection?.isConnected) {
       await this.connection.close();
     }
   }
 
   public async getConnection(): Promise<Connection> {
-    console.log("Start");
-
     try {
       if (this.connection?.isConnected === true) {
         return this.connection;

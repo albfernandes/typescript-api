@@ -31,9 +31,7 @@ export class ProcessHttpRequest {
   private configureRoutes(app: express.Express): void {
     RegisterRoutes(app);
 
-    app.use((request: express.Request, response: express.Response, next: NextFunction) => {
-      console.log("Route not found", { path: request.path });
-
+    app.use((_request: express.Request, response: express.Response, next: NextFunction) => {
       response
         .status(HttpStatusCode.NOT_FOUND)
         .send({

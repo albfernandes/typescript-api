@@ -34,8 +34,6 @@ export class GetStockController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
   public async getStock(@Query() stockCode: string, @Header() authorization: string): Promise<Stock[] | ErrorResult> {
-    console.log("Starting get stock route", { stockCode });
-
     const validRolesToThisUseCase = [RoleEnum.USER];
 
     const authenticationResult = await this.authenticateUserCommandHandler.handle({

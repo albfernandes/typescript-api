@@ -27,17 +27,12 @@ export class StockService {
       const PATH = "/stock-service/api/v1/stock";
       const params = { stockCode };
 
-      console.log("Getting stock", { stockCode });
-
       const result = await this.client.get(PATH, { params });
 
       const stocks: Stock[] = [...result.data];
 
-      console.log("Stock Result", { stocks });
-
       return new ResultSuccess(stocks);
     } catch (error) {
-      console.error("Failed to get stock", { error });
       return new ResultError("Failed to get stock");
     }
   }

@@ -17,25 +17,17 @@ export class UserRepository {
   }
 
   public async save(user: User): Promise<Result> {
-    console.log("Saving user", { data: user });
-
     try {
       const connection = await this.databaseConnection.getConnection();
-      const result = await connection.getRepository<NonFunctionProperties<User>>(UserEntity).save(user);
-
-      console.log("Saved user", { result });
+      await connection.getRepository<NonFunctionProperties<User>>(UserEntity).save(user);
 
       return new ResultSuccess(undefined);
     } catch (error) {
-      console.error("Failed to save user", { error });
-
       return new ResultError("Failed to save user");
     }
   }
 
   public async findByEmail(email: string): Promise<Result> {
-    console.log("Finding user by email", { email });
-
     try {
       const connection = await this.databaseConnection.getConnection();
 
@@ -46,22 +38,16 @@ export class UserRepository {
       const foundRawUser = await queryBuilder.getOne();
 
       if (foundRawUser === undefined) {
-        console.log("user not found by email", { email });
-
         return new ResultNotFound("user not found by email");
       }
 
       return new ResultSuccess(undefined);
     } catch (error) {
-      console.error("Failed to find user by email", { error });
-
       return new ResultError("Failed to find user by email");
     }
   }
 
   public async findById(id: string): Promise<Result<User>> {
-    console.log("Finding user by id", { id });
-
     try {
       const connection = await this.databaseConnection.getConnection();
 
@@ -72,15 +58,11 @@ export class UserRepository {
       const foundRawUser = await queryBuilder.getOne();
 
       if (foundRawUser === undefined) {
-        console.log("user not found by id", { id });
-
         return new ResultNotFound("user not found by id");
       }
 
       return new ResultSuccess(foundRawUser);
     } catch (error) {
-      console.error("Failed to find user by id", { error });
-
       return new ResultError("Failed to find user by id");
     }
   }

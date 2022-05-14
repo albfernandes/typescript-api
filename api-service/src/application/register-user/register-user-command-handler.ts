@@ -28,8 +28,6 @@ export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
   }
 
   public async handle(command: RegisterUserCommand): Promise<Result<RegisterUserResponse>> {
-    console.log("Start to registering user", { command });
-
     const userAlreadyExist = await this.userRepository.findByEmail(command.email);
 
     if (userAlreadyExist.status === ResultStatusEnum.SUCCESS) {

@@ -21,8 +21,6 @@ export class AuthenticateUserCommandHandler implements CommandHandler<Authentica
   }
 
   public async handle(command: AuthenticateUserCommand): Promise<Result<User>> {
-    console.log("Authenticating user", { command });
-
     if (!/Bearer\s/.test(command.token)) {
       return new ResultError("token with invalid format");
     }

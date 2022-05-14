@@ -17,13 +17,9 @@ export class StatsRepository {
   }
 
   public async save(stats: Stats): Promise<Result> {
-    console.log("Saving stats", { data: stats });
-
     try {
       const connection = await this.databaseConnection.getConnection();
-      const result = await connection.getRepository<NonFunctionProperties<Stats>>(StatsEntity).save(stats);
-
-      console.log("Saved stats", { result });
+      await connection.getRepository<NonFunctionProperties<Stats>>(StatsEntity).save(stats);
 
       return new ResultSuccess(undefined);
     } catch (error) {
@@ -34,8 +30,6 @@ export class StatsRepository {
   }
 
   public async findByStock(stock: string): Promise<Result<Stats>> {
-    console.log("Finding stats by stock", { stock });
-
     try {
       const connection = await this.databaseConnection.getConnection();
 
@@ -46,8 +40,6 @@ export class StatsRepository {
       const foundRawStats = await queryBuilder.getOne();
 
       if (foundRawStats === undefined) {
-        console.log("stats not found by stock", { stock });
-
         return new ResultNotFound("stats not found by stock");
       }
 
@@ -60,8 +52,6 @@ export class StatsRepository {
   }
 
   public async list(limit = 5): Promise<Result<Stats[]>> {
-    console.log("Listing stats", { limit });
-
     try {
       const connection = await this.databaseConnection.getConnection();
 

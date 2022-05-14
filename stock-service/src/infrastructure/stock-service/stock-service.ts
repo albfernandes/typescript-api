@@ -31,8 +31,6 @@ export class StockService {
       const PATH = "/q/l";
       const params = { s: stockCode, f: "sd2t2ohlcvn", h: "true", e: "csv" };
 
-      console.log("Getting stock", { params });
-
       const result = await this.client.get(PATH, { params });
 
       const parser = result.data.pipe(
@@ -69,8 +67,6 @@ export class StockService {
 
         stocks.push(stock);
       }
-
-      console.log("Stock Result", { stocks });
 
       return new ResultSuccess(stocks);
     } catch (error) {
