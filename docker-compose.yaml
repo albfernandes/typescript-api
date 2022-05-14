@@ -6,10 +6,10 @@ services:
     networks:
       - mynetwork
     volumes:
-      - .:/application
+      - ./api-service:/application
     ports:
       - 3001:3001
-    build: .
+    build: ./api-service
     command: sh -c "npm install && npm run db:migrate && npm run start:local"
     working_dir: /application
     depends_on:
@@ -24,6 +24,21 @@ services:
       TOKEN_SECRET: anysecret
       STOCK_SERVICE_URL: "http://stock-service:3000"
 
+  stock-service:
+    container_name: stockservice
+    networks:
+      - mynetwork
+    volumes:
+      - ./stock-service:/application
+    ports:
+      - 3000:3000
+    build: ./stock-service
+    command: sh -c "npm install && npm run start:local"
+    working_dir: /application
+    environment:
+      PORT: "3000"
+      STOCK_SERVICE_URL: "https://stooq.com"
+
   db:
     image: postgres:11-alpine
     networks:
@@ -32,7 +47,6 @@ services:
       POSTGRES_DB: api_service
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-
 
     ports:
       - 5432:5432
