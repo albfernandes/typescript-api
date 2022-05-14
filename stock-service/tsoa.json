@@ -7,7 +7,8 @@
     "host": "localhost:3000",
     "outputDirectory": ".",
     "specVersion": 3,
-    "yaml": true
+    "yaml": true,
+    "schemes": ["http", "https"]
   },
   "routes": {
     "basePath": "/()(stock-service/api)",
