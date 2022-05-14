@@ -3,9 +3,9 @@ import { Route, Controller, Tags, Get, Response, Query, Header } from "tsoa";
 import { AuthenticateUserCommandHandler } from "../../../application/authenticate-user/authenticate-user-command-handler";
 import { GetStockCommand } from "../../../application/get-stock/get-stock-command";
 import { GetStockCommandHandler } from "../../../application/get-stock/get-stock-command-handler";
-import { RoleEnum } from "../../../domain/enums/Role";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
 import { Stock } from "../../../infrastructure/stock-service/entities/stock";
+import { API_SCOPE } from "../configurations/api-scope";
 import { handleResult } from "../handle-result";
 import { ErrorResult } from "../types";
 
@@ -34,7 +34,7 @@ export class StockController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
   public async getStock(@Query() stockCode: string, @Header() authorization: string): Promise<Stock[] | ErrorResult> {
-    const validRolesToThisUseCase = [RoleEnum.USER];
+    const validRolesToThisUseCase = API_SCOPE.user;
 
     const authenticationResult = await this.authenticateUserCommandHandler.handle({
       token: authorization,

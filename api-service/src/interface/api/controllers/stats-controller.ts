@@ -2,9 +2,9 @@ import { inject, injectable } from "inversify";
 import { Route, Controller, Tags, Get, Response, Header } from "tsoa";
 import { AuthenticateUserCommandHandler } from "../../../application/authenticate-user/authenticate-user-command-handler";
 import { Stats } from "../../../domain/entities/Stats";
-import { RoleEnum } from "../../../domain/enums/Role";
 import { StatsRepository } from "../../../infrastructure/database/stats/stats-repository";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
+import { API_SCOPE } from "../configurations/api-scope";
 import { handleResult } from "../handle-result";
 import { ErrorResult } from "../types";
 
@@ -32,7 +32,7 @@ export class StatsController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
   public async getStats(@Header() authorization: string): Promise<Stats[] | ErrorResult> {
-    const validRolesToThisUseCase = [RoleEnum.ADMIN];
+    const validRolesToThisUseCase = API_SCOPE.admin;
 
     const authenticationResult = await this.authenticateUserCommandHandler.handle({
       token: authorization,
