@@ -5,7 +5,7 @@ import { ProcessHttpRequest } from "../../interface/api/process-http-request";
 import { BodyParserMiddleware } from "../../interface/api/middlewares/body-parser-middleware";
 import { ErrorMiddleware } from "../../interface/api/middlewares/error-middleware";
 import { Controller } from "tsoa";
-import { GetStockController } from "../../interface/api/controllers/get-stock-controller";
+import { StockController } from "../../interface/api/controllers/stock-controller";
 import { StockService } from "../stock-service/stock-service";
 import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
 
@@ -30,6 +30,6 @@ container.bind(BodyParserMiddleware).toSelf();
 container.bind(ErrorMiddleware).toSelf();
 
 // Controllers
-container.bind(GetStockController).toSelf();
+container.bind(StockController).toSelf();
 
 export { container, container as iocContainer };

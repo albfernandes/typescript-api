@@ -9,7 +9,7 @@ import { ErrorResult } from "../types";
 
 @injectable()
 @Route()
-export class GetStockController extends Controller {
+export class StockController extends Controller {
   private getStockCommandHandler: GetStockCommandHandler;
 
   constructor(@inject(GetStockCommandHandler) getStockCommandHandler: GetStockCommandHandler) {

@@ -3,7 +3,7 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { GetStockController } from './controllers/get-stock-controller';
+import { StockController } from './controllers/stock-controller';
 import { iocContainer } from './../../infrastructure/configurations/container';
 import { IocContainer, IocContainerFactory } from '@tsoa/runtime';
 import * as express from 'express';
@@ -44,7 +44,7 @@ export function RegisterRoutes(app: express.Router) {
     // ###########################################################################################################
         app.get('/()(stock-service/api)/v1/stock',
 
-            async function GetStockController_getStock(request: any, response: any, next: any) {
+            async function StockController_getStock(request: any, response: any, next: any) {
             const args = {
                     stockCode: {"in":"query","name":"stockCode","required":true,"dataType":"string"},
             };
@@ -57,7 +57,7 @@ export function RegisterRoutes(app: express.Router) {
 
                 const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
 
-                const controller: any = await container.get<GetStockController>(GetStockController);
+                const controller: any = await container.get<StockController>(StockController);
                 if (typeof controller['setStatus'] === 'function') {
                 controller.setStatus(undefined);
                 }
