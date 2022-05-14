@@ -20,6 +20,8 @@ import { HistoryController } from "../../interface/api/controllers/history-contr
 import { StatsRepository } from "../database/stats/stats-repository";
 import { StatsController } from "../../interface/api/controllers/stats-controller";
 import { CryptographyService } from "../cryptography-service/cryptography-service";
+import { LoginCommandHandler } from "../../application/login/login-command-handler";
+import { LoginController } from "../../interface/api/controllers/login-controller";
 
 const container: Container = new Container();
 
@@ -34,6 +36,7 @@ container.bind(Types.DatabaseOptions).toConstantValue(databaseOptions);
 container.bind(RegisterUserCommandHandler).toSelf();
 container.bind(GetStockCommandHandler).toSelf();
 container.bind(AuthenticateUserCommandHandler).toSelf();
+container.bind(LoginCommandHandler).toSelf();
 
 // infrastructure
 container.bind(Settings).toSelf();
@@ -55,5 +58,6 @@ container.bind(RegisterController).toSelf();
 container.bind(StockController).toSelf();
 container.bind(HistoryController).toSelf();
 container.bind(StatsController).toSelf();
+container.bind(LoginController).toSelf();
 
 export { container, container as iocContainer };

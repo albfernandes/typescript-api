@@ -27,7 +27,7 @@ export class UserRepository {
     }
   }
 
-  public async findByEmail(email: string): Promise<Result> {
+  public async findByEmail(email: string): Promise<Result<User>> {
     try {
       const connection = await this.databaseConnection.getConnection();
 
@@ -41,7 +41,7 @@ export class UserRepository {
         return new ResultNotFound("user not found by email");
       }
 
-      return new ResultSuccess(undefined);
+      return new ResultSuccess(foundRawUser);
     } catch (error) {
       return new ResultError("Failed to find user by email");
     }
