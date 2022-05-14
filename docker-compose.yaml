@@ -23,6 +23,7 @@ services:
       DATABASE_PORT: 5432
       TOKEN_SECRET: anysecret
       STOCK_SERVICE_URL: "http://stock-service:3000"
+      ENCRYPT_SALT_ROUNDS: 10
 
   stock-service:
     container_name: stockservice

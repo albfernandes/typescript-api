@@ -43,6 +43,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "token": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
+            "password": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -103,7 +104,7 @@ export function RegisterRoutes(app: express.Router) {
 
             async function RegisterController_register(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"role":{"ref":"RoleEnum","required":true},"email":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"password":{"dataType":"string","required":true},"role":{"ref":"RoleEnum","required":true},"email":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

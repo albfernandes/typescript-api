@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import { User } from "../../domain/entities/User";
-import { CryptographyService } from "../../infrastructure/cryptography/cryptography-service";
+import { SignService } from "../../infrastructure/sign-service/sign-service";
 import { UserRepository } from "../../infrastructure/database/user/user-repository";
 import { CommandHandler } from "../contracts/command-handler";
 import { Result } from "../contracts/result/result";
@@ -8,23 +8,28 @@ import { ResultError } from "../contracts/result/result-error";
 import { ResultStatusEnum } from "../contracts/result/result-status-enum";
 import { ResultSuccess } from "../contracts/result/result-success";
 import { RegisterUserCommand } from "./register-user-command";
+import { CryptographyService } from "../../infrastructure/cryptography-service/cryptography-service";
 
 export interface RegisterUserResponse {
   token: string;
   email: string;
+  password: string;
 }
 
 @injectable()
 export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCommand, RegisterUserResponse> {
   private readonly userRepository: UserRepository;
-  private readonly cryptographyservice: CryptographyService;
+  private readonly signService: SignService;
+  private readonly cryptographyService: CryptographyService;
 
   public constructor(
     @inject(UserRepository) userRepository: UserRepository,
-    @inject(CryptographyService) cryptographyservice: CryptographyService,
+    @inject(SignService) signService: SignService,
+    @inject(CryptographyService) cryptographyService: CryptographyService,
   ) {
     this.userRepository = userRepository;
-    this.cryptographyservice = cryptographyservice;
+    this.signService = signService;
+    this.cryptographyService = cryptographyService;
   }
 
   public async handle(command: RegisterUserCommand): Promise<Result<RegisterUserResponse>> {
@@ -38,10 +43,21 @@ export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
       return userAlreadyExist;
     }
 
+    const cryptographyServiceResponse = await this.cryptographyService.encrypt(command.password);
+
+    if (cryptographyServiceResponse.isError) {
+      return cryptographyServiceResponse;
+    }
+
     const newUser = User.create({
       email: command.email,
       role: command.role,
+      password: cryptographyServiceResponse.data,
     });
+
+    if (cryptographyServiceResponse.isError) {
+      return cryptographyServiceResponse;
+    }
 
     const saveResult = await this.userRepository.save(newUser);
 
@@ -49,7 +65,7 @@ export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
       return saveResult;
     }
 
-    const tokenResult = await this.cryptographyservice.encrypt({
+    const tokenResult = await this.signService.encrypt({
       userId: newUser.id,
     });
 
@@ -60,6 +76,7 @@ export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
     return new ResultSuccess({
       token: tokenResult.data,
       email: command.email,
+      password: command.password,
     });
   }
 }

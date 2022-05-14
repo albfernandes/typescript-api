@@ -8,7 +8,7 @@ import { Controller } from "tsoa";
 import { RegisterController } from "../../interface/api/controllers/register-controller";
 import { RegisterUserCommandHandler } from "../../application/register-user/register-user-command-handler";
 import { UserRepository } from "../database/user/user-repository";
-import { CryptographyService } from "../cryptography/cryptography-service";
+import { SignService } from "../sign-service/sign-service";
 import { DatabaseConnection } from "../database/database-connection";
 import databaseOptions from "../database/database-options";
 import { StockController } from "../../interface/api/controllers/stock-controller";
@@ -19,6 +19,7 @@ import { HistoryRepository } from "../database/history/history-repository";
 import { HistoryController } from "../../interface/api/controllers/history-controller";
 import { StatsRepository } from "../database/stats/stats-repository";
 import { StatsController } from "../../interface/api/controllers/stats-controller";
+import { CryptographyService } from "../cryptography-service/cryptography-service";
 
 const container: Container = new Container();
 
@@ -39,9 +40,10 @@ container.bind(Settings).toSelf();
 container.bind(UserRepository).toSelf();
 container.bind(HistoryRepository).toSelf();
 container.bind(StatsRepository).toSelf();
-container.bind(CryptographyService).toSelf();
+container.bind(SignService).toSelf();
 container.bind(DatabaseConnection).toSelf().inSingletonScope();
 container.bind(StockService).toSelf();
+container.bind(CryptographyService).toSelf();
 
 // Interface
 container.bind(ProcessHttpRequest).toSelf();

@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import { User } from "../../domain/entities/User";
-import { CryptographyService } from "../../infrastructure/cryptography/cryptography-service";
+import { SignService } from "../../infrastructure/sign-service/sign-service";
 import { UserRepository } from "../../infrastructure/database/user/user-repository";
 import { CommandHandler } from "../contracts/command-handler";
 import { Result } from "../contracts/result/result";
@@ -10,14 +10,14 @@ import { AuthenticateUserCommand } from "./authenticate-user-command";
 @injectable()
 export class AuthenticateUserCommandHandler implements CommandHandler<AuthenticateUserCommand, User> {
   private readonly userRepository: UserRepository;
-  private readonly cryptographyservice: CryptographyService;
+  private readonly signService: SignService;
 
   public constructor(
     @inject(UserRepository) userRepository: UserRepository,
-    @inject(CryptographyService) cryptographyservice: CryptographyService,
+    @inject(SignService) signService: SignService,
   ) {
     this.userRepository = userRepository;
-    this.cryptographyservice = cryptographyservice;
+    this.signService = signService;
   }
 
   public async handle(command: AuthenticateUserCommand): Promise<Result<User>> {
@@ -27,7 +27,7 @@ export class AuthenticateUserCommandHandler implements CommandHandler<Authentica
 
     const [, token]: string[] = command.token.split(" ");
 
-    const decodedToken = await this.cryptographyservice.decrypt(token);
+    const decodedToken = await this.signService.decrypt(token);
 
     if (decodedToken.isError) {
       return decodedToken;

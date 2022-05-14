@@ -14,6 +14,10 @@ export class Settings {
     return Number(this.returnOrThrow("PORT"));
   }
 
+  public get encryptSaltRounds(): number {
+    return Number(this.returnOrThrow("ENCRYPT_SALT_ROUNDS"));
+  }
+
   public get databaseName(): string {
     return this.returnOrThrow("DATABASE_NAME");
   }

@@ -46,9 +46,12 @@ components:
                     type: string
                 email:
                     type: string
+                password:
+                    type: string
             required:
                 - token
                 - email
+                - password
             type: object
             additionalProperties: false
         RoleEnum:
@@ -157,11 +160,14 @@ paths:
                     application/json:
                         schema:
                             properties:
+                                password:
+                                    type: string
                                 role:
                                     $ref: '#/components/schemas/RoleEnum'
                                 email:
                                     type: string
                             required:
+                                - password
                                 - role
                                 - email
                             type: object

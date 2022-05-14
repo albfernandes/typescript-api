@@ -1,4 +1,4 @@
-import { Express, NextFunction, Response } from "express";
+import { Express, NextFunction, Request, Response } from "express";
 import { injectable } from "inversify";
 import { ValidateError } from "tsoa";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
@@ -11,10 +11,13 @@ export class ErrorMiddleware implements IMiddleware {
     app.use(
       (
         error: unknown,
+        request: Request,
         response: Response<ErrorResult | ValidationErrorResult>,
         next: NextFunction,
       ): Response | void => {
         if (error instanceof ValidateError) {
+          console.log(`Invalid request for ${request.path}`, { error });
+
           return response.status(HttpStatusCode.BAD_REQUEST).json({
             message: "Invalid Request",
             details: error?.fields,
@@ -25,6 +28,8 @@ export class ErrorMiddleware implements IMiddleware {
           if (error.message === "Unauthorized") {
             return response.status(HttpStatusCode.UNAUTHORIZED).json({ message: error.message });
           }
+
+          console.log(`Unhandled error for ${request.path}`, { error });
 
           return response.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
             message: "Internal Server Error",

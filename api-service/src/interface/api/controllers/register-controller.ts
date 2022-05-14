@@ -28,7 +28,9 @@ export class RegisterController extends Controller {
   @Response<ErrorResult>(HttpStatusCode.BAD_REQUEST)
   @Response<ErrorResult>(HttpStatusCode.INTERNAL_SERVER_ERROR)
   @Response<ErrorResult>(HttpStatusCode.NOT_FOUND)
-  public async register(@Body() body: { email: string; role: RoleEnum }): Promise<RegisterUserResponse | ErrorResult> {
+  public async register(
+    @Body() body: { email: string; role: RoleEnum; password: string },
+  ): Promise<RegisterUserResponse | ErrorResult> {
     const registerUserCommand = new RegisterUserCommand({ ...body });
 
     const result = await this.registerUserCommandHandler.handle(registerUserCommand);

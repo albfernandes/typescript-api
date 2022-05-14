@@ -1,9 +1,9 @@
 import { inject, injectable } from "inversify";
 import { Settings } from "../configurations/settings";
-import { JwtPayload, sign, verify } from "jsonwebtoken";
 import { Result } from "../../application/contracts/result/result";
 import { ResultError } from "../../application/contracts/result/result-error";
 import { ResultSuccess } from "../../application/contracts/result/result-success";
+import bcrypt from "bcrypt";
 
 @injectable()
 export class CryptographyService {
@@ -13,23 +13,23 @@ export class CryptographyService {
     this.settings = settings;
   }
 
-  public async encrypt(payload: string | Object | Buffer): Promise<Result<string>> {
+  public async encrypt(payload: string): Promise<Result<string>> {
     try {
-      const token = await sign(payload, this.settings.tokenSecret);
+      const hash = await bcrypt.hash(payload, this.settings.encryptSaltRounds);
 
-      return new ResultSuccess(token);
+      return new ResultSuccess(hash);
     } catch (error) {
       return new ResultError("Failed to encrypt");
     }
   }
 
-  public async decrypt(encodedToken: string): Promise<Result<string | JwtPayload>> {
+  public async verify(plainTextPassword: string, hash: string): Promise<Result<boolean>> {
     try {
-      const decodedToken = await verify(encodedToken, this.settings.tokenSecret);
+      const hashEqualsPlainTextPassword = await bcrypt.compare(plainTextPassword, hash);
 
-      return new ResultSuccess(decodedToken);
+      return new ResultSuccess(hashEqualsPlainTextPassword);
     } catch (error) {
-      return new ResultError("Failed to decrypt");
+      return new ResultError("Failed to verify");
     }
   }
 }
