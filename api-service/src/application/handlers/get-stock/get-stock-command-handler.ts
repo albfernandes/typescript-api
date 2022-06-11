@@ -1,13 +1,13 @@
 import { inject, injectable } from "inversify";
-import { History } from "../../domain/entities/History";
-import { Stats } from "../../domain/entities/Stats";
-import { HistoryRepository } from "../../infrastructure/database/history/history-repository";
-import { StatsRepository } from "../../infrastructure/database/stats/stats-repository";
-import { Stock } from "../../infrastructure/stock-service/entities/stock";
-import { StockService } from "../../infrastructure/stock-service/stock-service";
-import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result";
-import { ResultStatusEnum } from "../contracts/result/result-status-enum";
+import { History } from "../../../domain/entities/History";
+import { Stats } from "../../../domain/entities/Stats";
+import { HistoryRepository } from "../../../infrastructure/database/history/history-repository";
+import { StatsRepository } from "../../../infrastructure/database/stats/stats-repository";
+import { Stock } from "../../../infrastructure/stock-service/entities/stock";
+import { StockService } from "../../../infrastructure/stock-service/stock-service";
+import { CommandHandler } from "../../contracts/command-handler";
+import { Result } from "../../contracts/result/result";
+import { ResultStatusEnum } from "../../contracts/result/result-status-enum";
 import { GetStockCommand } from "./get-stock-command";
 
 @injectable()

@@ -1,4 +1,5 @@
 import { injectable, inject } from "inversify";
+import { IStatsRepository } from "../../../application/contracts/istats-repository";
 import { Result } from "../../../application/contracts/result/result";
 import { ResultError } from "../../../application/contracts/result/result-error";
 import { ResultNotFound } from "../../../application/contracts/result/result-not-found";
@@ -9,7 +10,7 @@ import { DatabaseConnection } from "../database-connection";
 import { StatsEntity } from "./stats-schema";
 
 @injectable()
-export class StatsRepository {
+export class StatsRepository implements IStatsRepository {
   private readonly databaseConnection: DatabaseConnection;
 
   public constructor(@inject(DatabaseConnection) databaseConnection: DatabaseConnection) {

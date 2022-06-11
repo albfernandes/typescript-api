@@ -1,4 +1,5 @@
 import { injectable, inject } from "inversify";
+import { IUserRepository } from "../../../application/contracts/iuser-repository";
 import { Result } from "../../../application/contracts/result/result";
 import { ResultError } from "../../../application/contracts/result/result-error";
 import { ResultNotFound } from "../../../application/contracts/result/result-not-found";
@@ -9,7 +10,7 @@ import { DatabaseConnection } from "../database-connection";
 import { UserEntity } from "./user-schema";
 
 @injectable()
-export class UserRepository {
+export class UserRepository implements IUserRepository {
   private readonly databaseConnection: DatabaseConnection;
 
   public constructor(@inject(DatabaseConnection) databaseConnection: DatabaseConnection) {

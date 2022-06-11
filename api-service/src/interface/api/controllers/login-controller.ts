@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { Route, Controller, Tags, Response, Post, Body } from "tsoa";
-import { LoginCommand } from "../../../application/login/login-command";
-import { LoginCommandHandler, LoginResponse } from "../../../application/login/login-command-handler";
+import { LoginCommand } from "../../../application/handlers/login/login-command";
+import { LoginCommandHandler, LoginResponse } from "../../../application/handlers/login/login-command-handler";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
 import { handleResult } from "../handle-result";
 import { ErrorResult } from "../types";

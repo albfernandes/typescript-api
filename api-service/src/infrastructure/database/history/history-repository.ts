@@ -1,4 +1,5 @@
 import { injectable, inject } from "inversify";
+import { IHistoryRepository } from "../../../application/contracts/ihistory-repository";
 import { Result } from "../../../application/contracts/result/result";
 import { ResultError } from "../../../application/contracts/result/result-error";
 import { ResultSuccess } from "../../../application/contracts/result/result-success";
@@ -8,7 +9,7 @@ import { DatabaseConnection } from "../database-connection";
 import { HistoryEntity } from "./history-schema";
 
 @injectable()
-export class HistoryRepository {
+export class HistoryRepository implements IHistoryRepository {
   private readonly databaseConnection: DatabaseConnection;
 
   public constructor(@inject(DatabaseConnection) databaseConnection: DatabaseConnection) {

@@ -1,4 +1,4 @@
-import { NonFunctionProperties } from "../contracts/types";
+import { NonFunctionProperties } from "../../contracts/types";
 
 export class LoginCommand {
   public email: string;

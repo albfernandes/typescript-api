@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import { Route, Controller, Tags, Get, Response, Header } from "tsoa";
-import { AuthenticateUserCommandHandler } from "../../../application/authenticate-user/authenticate-user-command-handler";
+import { AuthenticateUserCommandHandler } from "../../../application/handlers/authenticate-user/authenticate-user-command-handler";
 import { HistoryRepository } from "../../../infrastructure/database/history/history-repository";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
 import { Stock } from "../../../infrastructure/stock-service/entities/stock";

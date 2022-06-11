@@ -1,12 +1,13 @@
 import { inject, injectable } from "inversify";
-import { UserRepository } from "../../infrastructure/database/user/user-repository";
-import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result";
-import { ResultSuccess } from "../contracts/result/result-success";
-import { CryptographyService } from "../../infrastructure/cryptography-service/cryptography-service";
+import { CryptographyService } from "../../../infrastructure/cryptography-service/cryptography-service";
+import { SignService } from "../../../infrastructure/sign-service/sign-service";
+import { CommandHandler } from "../../contracts/command-handler";
+import { IUserRepository } from "../../contracts/iuser-repository";
+import { Result } from "../../contracts/result/result";
+import { ResultError } from "../../contracts/result/result-error";
+import { ResultSuccess } from "../../contracts/result/result-success";
 import { LoginCommand } from "./login-command";
-import { SignService } from "../../infrastructure/sign-service/sign-service";
-import { ResultError } from "../contracts/result/result-error";
+import * as Types from ".././../../infrastructure/configurations/types";
 
 export interface LoginResponse {
   token: string;
@@ -14,12 +15,12 @@ export interface LoginResponse {
 
 @injectable()
 export class LoginCommandHandler implements CommandHandler<LoginCommand, LoginResponse> {
-  private readonly userRepository: UserRepository;
+  private readonly userRepository: IUserRepository;
   private readonly signService: SignService;
   private readonly cryptographyService: CryptographyService;
 
   public constructor(
-    @inject(UserRepository) userRepository: UserRepository,
+    @inject(Types.IUserRepository) userRepository: IUserRepository,
     @inject(SignService) signService: SignService,
     @inject(CryptographyService) cryptographyService: CryptographyService,
   ) {

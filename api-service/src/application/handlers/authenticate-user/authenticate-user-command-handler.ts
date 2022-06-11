@@ -1,19 +1,20 @@
 import { inject, injectable } from "inversify";
-import { User } from "../../domain/entities/User";
-import { SignService } from "../../infrastructure/sign-service/sign-service";
-import { UserRepository } from "../../infrastructure/database/user/user-repository";
-import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result";
-import { ResultError } from "../contracts/result/result-error";
 import { AuthenticateUserCommand } from "./authenticate-user-command";
+import { ResultError } from "../../contracts/result/result-error";
+import { CommandHandler } from "../../contracts/command-handler";
+import { User } from "../../../domain/entities/User";
+import { SignService } from "../../../infrastructure/sign-service/sign-service";
+import { Result } from "../../contracts/result/result";
+import { IUserRepository } from "../../contracts/iuser-repository";
+import * as Types from ".././../../infrastructure/configurations/types";
 
 @injectable()
 export class AuthenticateUserCommandHandler implements CommandHandler<AuthenticateUserCommand, User> {
-  private readonly userRepository: UserRepository;
+  private readonly userRepository: IUserRepository;
   private readonly signService: SignService;
 
   public constructor(
-    @inject(UserRepository) userRepository: UserRepository,
+    @inject(Types.IUserRepository) userRepository: IUserRepository,
     @inject(SignService) signService: SignService,
   ) {
     this.userRepository = userRepository;

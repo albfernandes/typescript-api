@@ -6,22 +6,25 @@ import { BodyParserMiddleware } from "../../interface/api/middlewares/body-parse
 import { ErrorMiddleware } from "../../interface/api/middlewares/error-middleware";
 import { Controller } from "tsoa";
 import { RegisterController } from "../../interface/api/controllers/register-controller";
-import { RegisterUserCommandHandler } from "../../application/register-user/register-user-command-handler";
-import { UserRepository } from "../database/user/user-repository";
 import { SignService } from "../sign-service/sign-service";
 import { DatabaseConnection } from "../database/database-connection";
 import databaseOptions from "../database/database-options";
 import { StockController } from "../../interface/api/controllers/stock-controller";
-import { GetStockCommandHandler } from "../../application/get-stock/get-stock-command-handler";
 import { StockService } from "../stock-service/stock-service";
-import { AuthenticateUserCommandHandler } from "../../application/authenticate-user/authenticate-user-command-handler";
 import { HistoryRepository } from "../database/history/history-repository";
 import { HistoryController } from "../../interface/api/controllers/history-controller";
 import { StatsRepository } from "../database/stats/stats-repository";
 import { StatsController } from "../../interface/api/controllers/stats-controller";
 import { CryptographyService } from "../cryptography-service/cryptography-service";
-import { LoginCommandHandler } from "../../application/login/login-command-handler";
 import { LoginController } from "../../interface/api/controllers/login-controller";
+import { AuthenticateUserCommandHandler } from "../../application/handlers/authenticate-user/authenticate-user-command-handler";
+import { GetStockCommandHandler } from "../../application/handlers/get-stock/get-stock-command-handler";
+import { LoginCommandHandler } from "../../application/handlers/login/login-command-handler";
+import { RegisterUserCommandHandler } from "../../application/handlers/register-user/register-user-command-handler";
+import { IUserRepository } from "../../application/contracts/iuser-repository";
+import { IHistoryRepository } from "../../application/contracts/ihistory-repository";
+import { IStatsRepository } from "../../application/contracts/istats-repository";
+import { UserRepository } from "../database/user/user-repository";
 
 const container: Container = new Container();
 
@@ -40,9 +43,9 @@ container.bind(LoginCommandHandler).toSelf();
 
 // infrastructure
 container.bind(Settings).toSelf();
-container.bind(UserRepository).toSelf();
-container.bind(HistoryRepository).toSelf();
-container.bind(StatsRepository).toSelf();
+container.bind<IUserRepository>(Types.IUserRepository).to(UserRepository);
+container.bind<IHistoryRepository>(Types.IHistoryRepository).to(HistoryRepository);
+container.bind<IStatsRepository>(Types.IStatsRepository).to(StatsRepository);
 container.bind(SignService).toSelf();
 container.bind(DatabaseConnection).toSelf().inSingletonScope();
 container.bind(StockService).toSelf();

@@ -1,5 +1,5 @@
-import { RoleEnum } from "../../domain/enums/Role";
-import { NonFunctionProperties } from "../contracts/types";
+import { RoleEnum } from "../../../domain/enums/Role";
+import { NonFunctionProperties } from "../../contracts/types";
 
 export class RegisterUserCommand {
   public email: string;

@@ -1,14 +1,14 @@
 import { inject, injectable } from "inversify";
-import { User } from "../../domain/entities/User";
-import { SignService } from "../../infrastructure/sign-service/sign-service";
-import { UserRepository } from "../../infrastructure/database/user/user-repository";
-import { CommandHandler } from "../contracts/command-handler";
-import { Result } from "../contracts/result/result";
-import { ResultError } from "../contracts/result/result-error";
-import { ResultStatusEnum } from "../contracts/result/result-status-enum";
-import { ResultSuccess } from "../contracts/result/result-success";
+import { User } from "../../../domain/entities/User";
+import { CryptographyService } from "../../../infrastructure/cryptography-service/cryptography-service";
+import { UserRepository } from "../../../infrastructure/database/user/user-repository";
+import { SignService } from "../../../infrastructure/sign-service/sign-service";
+import { CommandHandler } from "../../contracts/command-handler";
+import { Result } from "../../contracts/result/result";
+import { ResultError } from "../../contracts/result/result-error";
+import { ResultStatusEnum } from "../../contracts/result/result-status-enum";
+import { ResultSuccess } from "../../contracts/result/result-success";
 import { RegisterUserCommand } from "./register-user-command";
-import { CryptographyService } from "../../infrastructure/cryptography-service/cryptography-service";
 
 export interface RegisterUserResponse {
   token: string;

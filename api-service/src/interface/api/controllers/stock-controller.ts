@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
 import { Route, Controller, Tags, Get, Response, Query, Header } from "tsoa";
-import { AuthenticateUserCommandHandler } from "../../../application/authenticate-user/authenticate-user-command-handler";
-import { GetStockCommand } from "../../../application/get-stock/get-stock-command";
-import { GetStockCommandHandler } from "../../../application/get-stock/get-stock-command-handler";
+import { AuthenticateUserCommandHandler } from "../../../application/handlers/authenticate-user/authenticate-user-command-handler";
+import { GetStockCommand } from "../../../application/handlers/get-stock/get-stock-command";
+import { GetStockCommandHandler } from "../../../application/handlers/get-stock/get-stock-command-handler";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
 import { Stock } from "../../../infrastructure/stock-service/entities/stock";
 import { API_SCOPE } from "../configurations/api-scope";

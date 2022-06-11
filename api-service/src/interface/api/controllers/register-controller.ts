@@ -1,10 +1,10 @@
 import { inject, injectable } from "inversify";
 import { Route, Controller, Tags, Response, Post, Body } from "tsoa";
-import { RegisterUserCommand } from "../../../application/register-user/register-user-command";
+import { RegisterUserCommand } from "../../../application/handlers/register-user/register-user-command";
 import {
   RegisterUserCommandHandler,
   RegisterUserResponse,
-} from "../../../application/register-user/register-user-command-handler";
+} from "../../../application/handlers/register-user/register-user-command-handler";
 import { RoleEnum } from "../../../domain/enums/Role";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
 import { handleResult } from "../handle-result";
