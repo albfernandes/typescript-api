@@ -54,12 +54,9 @@ components:
                     type: string
                 email:
                     type: string
-                password:
-                    type: string
             required:
                 - token
                 - email
-                - password
             type: object
             additionalProperties: false
         RoleEnum:

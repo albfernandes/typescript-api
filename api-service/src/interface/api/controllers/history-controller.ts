@@ -1,9 +1,10 @@
 import { inject, injectable } from "inversify";
-import { Route, Controller, Tags, Get, Response, Header } from "tsoa";
+import { Controller, Get, Header, Response, Route, Tags } from "tsoa";
+import { IHistoryRepository } from "../../../application/contracts/ihistory-repository";
 import { AuthenticateUserCommandHandler } from "../../../application/handlers/authenticate-user/authenticate-user-command-handler";
-import { HistoryRepository } from "../../../infrastructure/database/history/history-repository";
 import { HttpStatusCode } from "../../../infrastructure/http/http-status-code";
 import { Stock } from "../../../infrastructure/stock-service/entities/stock";
+import * as Types from ".././../../infrastructure/configurations/types";
 import { API_SCOPE } from "../configurations/api-scope";
 import { handleResult } from "../handle-result";
 import { ErrorResult } from "../types";
@@ -11,11 +12,11 @@ import { ErrorResult } from "../types";
 @injectable()
 @Route()
 export class HistoryController extends Controller {
-  private historyRepository: HistoryRepository;
+  private historyRepository: IHistoryRepository;
   private authenticateUserCommandHandler: AuthenticateUserCommandHandler;
 
   constructor(
-    @inject(HistoryRepository) historyRepository: HistoryRepository,
+    @inject(Types.IHistoryRepository) historyRepository: IHistoryRepository,
     @inject(AuthenticateUserCommandHandler) authenticateUserCommandHandler: AuthenticateUserCommandHandler,
   ) {
     super();

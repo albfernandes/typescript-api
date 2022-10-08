@@ -1,27 +1,28 @@
 import { inject, injectable } from "inversify";
 import { History } from "../../../domain/entities/History";
 import { Stats } from "../../../domain/entities/Stats";
-import { HistoryRepository } from "../../../infrastructure/database/history/history-repository";
-import { StatsRepository } from "../../../infrastructure/database/stats/stats-repository";
 import { Stock } from "../../../infrastructure/stock-service/entities/stock";
 import { StockService } from "../../../infrastructure/stock-service/stock-service";
 import { CommandHandler } from "../../contracts/command-handler";
+import { IHistoryRepository } from "../../contracts/ihistory-repository";
+import { IStatsRepository } from "../../contracts/istats-repository";
 import { Result } from "../../contracts/result/result";
 import { ResultStatusEnum } from "../../contracts/result/result-status-enum";
+import * as Types from ".././../../infrastructure/configurations/types";
 import { GetStockCommand } from "./get-stock-command";
 
 @injectable()
 export class GetStockCommandHandler implements CommandHandler<GetStockCommand, Stock[]> {
   private readonly stockService: StockService;
 
-  private readonly historyRepository: HistoryRepository;
+  private readonly historyRepository: IHistoryRepository;
 
-  private readonly statsRepository: StatsRepository;
+  private readonly statsRepository: IStatsRepository;
 
   public constructor(
     @inject(StockService) stockService: StockService,
-    @inject(HistoryRepository) historyRepository: HistoryRepository,
-    @inject(StatsRepository) statsRepository: StatsRepository,
+    @inject(Types.IHistoryRepository) historyRepository: IHistoryRepository,
+    @inject(Types.IStatsRepository) statsRepository: IStatsRepository,
   ) {
     this.stockService = stockService;
     this.historyRepository = historyRepository;

@@ -1,29 +1,29 @@
 import { inject, injectable } from "inversify";
 import { User } from "../../../domain/entities/User";
 import { CryptographyService } from "../../../infrastructure/cryptography-service/cryptography-service";
-import { UserRepository } from "../../../infrastructure/database/user/user-repository";
 import { SignService } from "../../../infrastructure/sign-service/sign-service";
 import { CommandHandler } from "../../contracts/command-handler";
+import { IUserRepository } from "../../contracts/iuser-repository";
 import { Result } from "../../contracts/result/result";
 import { ResultError } from "../../contracts/result/result-error";
 import { ResultStatusEnum } from "../../contracts/result/result-status-enum";
 import { ResultSuccess } from "../../contracts/result/result-success";
+import * as Types from ".././../../infrastructure/configurations/types";
 import { RegisterUserCommand } from "./register-user-command";
 
 export interface RegisterUserResponse {
   token: string;
   email: string;
-  password: string;
 }
 
 @injectable()
 export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCommand, RegisterUserResponse> {
-  private readonly userRepository: UserRepository;
+  private readonly userRepository: IUserRepository;
   private readonly signService: SignService;
   private readonly cryptographyService: CryptographyService;
 
   public constructor(
-    @inject(UserRepository) userRepository: UserRepository,
+    @inject(Types.IUserRepository) userRepository: IUserRepository,
     @inject(SignService) signService: SignService,
     @inject(CryptographyService) cryptographyService: CryptographyService,
   ) {
@@ -76,7 +76,6 @@ export class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
     return new ResultSuccess({
       token: tokenResult.data,
       email: command.email,
-      password: command.password,
     });
   }
 }
