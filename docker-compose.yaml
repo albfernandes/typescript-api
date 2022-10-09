@@ -9,6 +9,7 @@ services:
       - ./api-service:/application
     ports:
       - 3001:3001
+      - 5555:5555
     build: ./api-service
     command: sh -c "npm install && npm run db:migrate && npm run start:local"
     working_dir: /application

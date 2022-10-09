@@ -25,6 +25,9 @@ import { IUserRepository } from "../../application/contracts/iuser-repository";
 import { IHistoryRepository } from "../../application/contracts/ihistory-repository";
 import { IStatsRepository } from "../../application/contracts/istats-repository";
 import { UserRepository } from "../database/user/user-repository";
+import { ProcessGraphqlRequest } from "../../interface/api/graphql/process-graphql-request";
+import { HistoryResolver } from "../../interface/api/graphql/resolvers/history-resolver";
+import { SchemaBuilder } from "../../interface/api/graphql/schemas/schema-builder";
 
 const container: Container = new Container();
 
@@ -52,9 +55,12 @@ container.bind(StockService).toSelf();
 container.bind(CryptographyService).toSelf();
 
 // Interface
+container.bind(HistoryResolver).toSelf();
+container.bind(SchemaBuilder).toSelf();
 container.bind(ProcessHttpRequest).toSelf();
 container.bind(BodyParserMiddleware).toSelf();
 container.bind(ErrorMiddleware).toSelf();
+container.bind(ProcessGraphqlRequest).toSelf();
 
 // Controllers
 container.bind(RegisterController).toSelf();

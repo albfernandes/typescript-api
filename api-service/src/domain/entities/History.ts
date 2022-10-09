@@ -3,7 +3,19 @@ import { v4 as uuid } from "uuid";
 
 type CreateHistoryParams = Omit<NonFunctionProperties<History>, "date" | "id">;
 
-export class History {
+export interface IHistory {
+  name: string;
+  symbol: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  date: Date;
+  userId: string;
+  id: string;
+}
+
+export class History implements IHistory {
   public name!: string;
 
   public symbol!: string;
